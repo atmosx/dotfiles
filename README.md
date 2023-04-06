@@ -2,7 +2,7 @@
 
 CLI configuration files (dotfiles) that I use daily on multiple computers.
 
-## requirements
+## Goodies
 
 - [MacPorts](https://www.macports.org/)
     - python v3.10.10
@@ -11,3 +11,4 @@ CLI configuration files (dotfiles) that I use daily on multiple computers.
     - etc
 - [z](https://github.com/rupa/z)
 - [direnv](https://direnv.net/)
+* [Inconsolata nerdfonts](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/InconsolataLGC.zip)

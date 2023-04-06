@@ -68,6 +68,6 @@ export MANPATH="/usr/local/man:$MANPATH"
 export GOPATH="$HOME/Programs" #Golang configuration
 
 # custom configuration
-. /Users/atma/Local/z/z.sh
+. $HOME/Local/z/z.sh
 eval "$(direnv hook zsh)" # direnv
 source <(doctl completion zsh) # digitalOcean
