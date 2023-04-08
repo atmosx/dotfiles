@@ -13,3 +13,4 @@ if [ -f "$vrc_s" ]; then
 fi
 
 cat ${vrc_c} | envsubst > ~/.vimrc
+cp -r vim ~/.vim
