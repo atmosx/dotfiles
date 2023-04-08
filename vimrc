@@ -58,8 +58,6 @@ au FileType gitcommit set tw=80
 
 " Spelling opts
 :hi SpellBad cterm=underline,bold ctermfg=white ctermbg=black
-:map <F5> :setlocal spell! spelllang=en_us<CR>
-:map <F6> :setlocal spell! spelllang=el_gr<CR>
 :map <F7> :setlocal spell! spelllang=engr<CR>
 
 " Personal Journal Options
@@ -79,10 +77,12 @@ augroup lexical
   autocmd FileType text call lexical#init({ 'spell': 0 })
 augroup END
 
+" spell settings
 " set spell spelllang=engr
-let g:lexical#spell = 1
-let g:lexical#dictionary = ['/usr/share/dict/words','/opt/loca/share/dic/words-el']
-let g:lexical#spellfile  = ['~/.vim/spell/el.utf-8.spl', '~/.vim/spell/engr.utf-8.spl']
+let g:lexical#spell      = 1
+let g:lexical#thesaurus  = ['~/.vim/lexical/thesaurus/mthesaur.txt',]
+let g:lexical#dictionary = ['~/.vim/lexical/dict/connectives','~/.vim/lexical/dict/propernames','~/.vim/lexical/dict/web2','~/.vim/lexical/dict/web2a','~/.vim/lexical/dict/words']
+let g:lexical#spellfile  = ['~/.vim/spell/engr.utf-8.spl']
 
 "Ctrl+P
 let g:ctrlp_working_path_mode = 0 " search only files in local dir
