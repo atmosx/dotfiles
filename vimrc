@@ -1,5 +1,3 @@
-" .vimrc
-"
 " author: atmosx
 " date: 2023/04/08
 " rev: 3
@@ -19,7 +17,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --ts-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --go-completer' }
 call plug#end()
 """ vim plugins end
 
@@ -82,7 +80,7 @@ augroup END
 let g:lexical#spell      = 1
 let g:lexical#thesaurus  = ['~/.vim/lexical/thesaurus/mthesaur.txt',]
 let g:lexical#dictionary = ['~/.vim/lexical/dict/connectives','~/.vim/lexical/dict/propernames','~/.vim/lexical/dict/web2','~/.vim/lexical/dict/web2a','~/.vim/lexical/dict/words']
-let g:lexical#spellfile  = ['~/.vim/spell/engr.utf-8.spl']
+"let g:lexical#spellfile  = ['~/.vim/spell/engr.utf-8.spl']
 
 "Ctrl+P
 let g:ctrlp_working_path_mode = 0 " search only files in local dir
