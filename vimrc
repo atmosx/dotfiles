@@ -17,7 +17,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --go-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --go-completer --rust-completer --ts-completer' }
 call plug#end()
 """ vim plugins end
 
