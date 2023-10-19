@@ -10,16 +10,17 @@ Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'junegunn/vim-journal'
 Plug 'ledger/vim-ledger'
 Plug 'madox2/vim-ai'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/vim-lexical'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'wakatime/vim-wakatime'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --go-completer --rust-completer --ts-completer' }
 call plug#end()
 """ vim plugins end
 
