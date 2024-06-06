@@ -7,6 +7,8 @@ CLI configuration files (dotfiles) that I use daily on multiple computers.
 - [MacPorts](https://www.macports.org/)
     - vim 9.x +huge
     - python v3.9.x
+    - rbenv & ruby-build
+    - tmux
     - rust
     - golang
     - nodejs
