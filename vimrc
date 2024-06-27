@@ -1,31 +1,35 @@
+" .vimrc
+"
 " author: atmosx
-" date: 2023/04/08
-" rev: 3
+" date: 2024/06/06
+" rev: 4
 
 """ vim plugins start - NOTE: use single quotes
 call plug#begin()
 Plug 'chrisbra/csv.vim'
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'pgporada/vim-mtail'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'github/copilot.vim'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-journal'
 Plug 'ledger/vim-ledger'
+Plug 'liuchengxu/graphviz.vim'
 Plug 'madox2/vim-ai'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvie/vim-flake8'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/vim-lexical'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-obsession'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'wakatime/vim-wakatime'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --ts-completer' }
 call plug#end()
 """ vim plugins end
 
-" theme
-colorscheme jellybeans
+" theme: jellybeans | vividchalk
+colorscheme vividchalk
 
 " my vim settings
 set autoindent
@@ -45,17 +49,51 @@ set nomodeline
 set nowrap " Turn off word wrapping
 set number
 set relativenumber
-set textwidth=80
-set rtp+=/opt/local/share/fzf/vim " requires fzf cli utility
+set textwidth=150
+set rtp+=/opt/local/share/fzf/vim " install fzf (cli utility) bat ripgrep the_silver_searcher perl universal-ctags
 set shiftwidth=2
 set smartcase " ignore case if search pattern is all lowercase
 set tabstop=2 " Programming no tab, just 2 spaces identing
+set completeopt+=popup " Allow keyboard based (YCM) popup scrolling
 syntax on
 filetype plugin on
 filetype indent on
 
+" Screen pop-up window
+"
+"
+function! ScrollPopup(down)
+    let winid = popup_findinfo()
+    if winid == 0
+        return 0
+    endif
+
+    " if the popup window is hidden, bypass the keystrokes
+    let pp = popup_getpos(winid)
+    if pp.visible != 1
+        return 0
+    endif
+
+    let firstline = pp.firstline + a:down
+    let buf_lastline = str2nr(trim(win_execute(winid, "echo line('$')")))
+    if firstline < 1
+        let firstline = 1
+    elseif pp.lastline + a:down > buf_lastline
+        let firstline = firstline - a:down + buf_lastline - pp.lastline
+    endif
+
+    " The appear of scrollbar will change the layout of the content which will cause inconsistent height.
+    call popup_setoptions( winid,
+                \ {'scrollbar': 0, 'firstline' : firstline } )
+
+    return 1
+endfunction
+
+inoremap <expr> <C-e> ScrollPopup(3) ? '' : '<C-e>'
+inoremap <expr> <C-y> ScrollPopup(-3) ? '' : '<C-y>'
+
 " warp to 80 when editing git commits
-au FileType gitcommit set tw=80
+au FileType gitcommit set tw=160
 
 " Spelling opts
 :hi SpellBad cterm=underline,bold ctermfg=white ctermbg=black
@@ -63,8 +101,8 @@ au FileType gitcommit set tw=80
 
 " Personal Journal Options
 let g:journal_encrypted = 1
-let g:journal_directory = "$HOME/.MyJournal"
-let g:GPGDefaultRecipients = '${MY_EMAIL}'
+let g:journal_directory = "/Users/atma/.MyJournal"
+let g:GPGDefaultRecipients = 'atma@convalesco.org'
 
 " NERDTree leave ansible retry files out
 let NERDTreeIgnore = ['\.retry$']
@@ -81,12 +119,9 @@ augroup END
 " spell settings
 " set spell spelllang=engr
 let g:lexical#spell      = 1
-let g:lexical#thesaurus  = ['~/.vim/lexical/thesaurus/mthesaur.txt',]
-let g:lexical#dictionary = ['~/.vim/lexical/dict/connectives','~/.vim/lexical/dict/propernames','~/.vim/lexical/dict/web2','~/.vim/lexical/dict/web2a','~/.vim/lexical/dict/words']
-"let g:lexical#spellfile  = ['~/.vim/spell/engr.utf-8.spl']
-
-"Ctrl+P
-let g:ctrlp_working_path_mode = 0 " search only files in local dir
+let g:lexical#thesaurus  = ["~/.vim/lexical/thesaurus/mthesaur.txt",]
+let g:lexical#dictionary = ["~/.vim/lexical/dict/connectives","~/.vim/lexical/dict/propernames","~/.vim/lexical/dict/web2","~/.vim/lexical/dict/web2a","~/.vim/lexical/dict/words"]
+" let g:lexical#spellfile  = ["~/.vim/spell/engr.utf-8.spl"]
 
 " vim fixup
 " https://blog.mikecordell.com/2014/07/20/quick-fixup-in-vim-with-fugitive.html
@@ -127,7 +162,37 @@ au FileType go nmap <leader>f <Plug>(go-fmt)
 " ---------------
 au BufNewFile,BufRead *.py setlocal ts=4 softtabstop=4 shiftwidth=4 expandtab autoindent fileformat=unix
 " Python checker
-let g:syntastic_python_checkers = ['flake8']
+" let g:syntastic_python_checkers = ['flake8']
 
 " Run flake8 on every python file for PEP8 compatibility
 " autocmd BufWritePost *.py call Flake8()
+"
+
+" Use local LLM
+" let g:vim_ai_complete = {
+" \  "options": {
+" \    "endpoint_url": "http://localhost:8000/v1/completions",
+" \    "enable_auth": 0,
+" \  },
+" \}
+"
+" let g:vim_ai_edit = {
+" \  "options": {
+" \    "endpoint_url": "http://localhost:8000/v1/completions",
+" \    "enable_auth": 0,
+" \  },
+" \}
+"
+" let g:vim_ai_chat = {
+" \  "options": {
+" \    "endpoint_url": "http://localhost:8000/v1/chat/completions",
+" \    "enable_auth": 0,
+" \  },
+" \}
+
+" Fzf search
+nnoremap <C-p> :GFiles<Cr>
+
+" copilot keybindings
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
