@@ -24,6 +24,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'wakatime/vim-wakatime'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --ts-completer' }
 call plug#end()
 """ vim plugins end
@@ -49,7 +50,7 @@ set nomodeline
 set nowrap " Turn off word wrapping
 set number
 set relativenumber
-set textwidth=150
+set textwidth=160
 set rtp+=/opt/local/share/fzf/vim " install fzf (cli utility) bat ripgrep the_silver_searcher perl universal-ctags
 set shiftwidth=2
 set smartcase " ignore case if search pattern is all lowercase
@@ -101,8 +102,8 @@ au FileType gitcommit set tw=160
 
 " Personal Journal Options
 let g:journal_encrypted = 1
-let g:journal_directory = "/Users/atma/.MyJournal"
-let g:GPGDefaultRecipients = 'atma@convalesco.org'
+let g:journal_directory = "$HOME/.MyJournal"
+let g:GPGDefaultRecipients = '${MY_EMAIL}'
 
 " NERDTree leave ansible retry files out
 let NERDTreeIgnore = ['\.retry$']
@@ -119,10 +120,9 @@ augroup END
 " spell settings
 " set spell spelllang=engr
 let g:lexical#spell      = 1
-let g:lexical#thesaurus  = ["~/.vim/lexical/thesaurus/mthesaur.txt",]
-let g:lexical#dictionary = ["~/.vim/lexical/dict/connectives","~/.vim/lexical/dict/propernames","~/.vim/lexical/dict/web2","~/.vim/lexical/dict/web2a","~/.vim/lexical/dict/words"]
-" let g:lexical#spellfile  = ["~/.vim/spell/engr.utf-8.spl"]
-
+let g:lexical#thesaurus  = ['~/.vim/lexical/thesaurus/mthesaur.txt',]
+let g:lexical#dictionary = ['~/.vim/lexical/dict/connectives','~/.vim/lexical/dict/propernames','~/.vim/lexical/dict/web2','~/.vim/lexical/dict/web2a','~/.vim/lexical/dict/words']
+"let g:lexical#spellfile  = ['~/.vim/spell/engr.utf-8.spl']
 " vim fixup
 " https://blog.mikecordell.com/2014/07/20/quick-fixup-in-vim-with-fugitive.html
 map <space>l :Git! log<CR>gg
@@ -162,7 +162,7 @@ au FileType go nmap <leader>f <Plug>(go-fmt)
 " ---------------
 au BufNewFile,BufRead *.py setlocal ts=4 softtabstop=4 shiftwidth=4 expandtab autoindent fileformat=unix
 " Python checker
-" let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checkers = ['flake8']
 
 " Run flake8 on every python file for PEP8 compatibility
 " autocmd BufWritePost *.py call Flake8()
