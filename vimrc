@@ -1,31 +1,36 @@
 " .vimrc
 "
 " author: atmosx
-" date: 2024/06/06
-" rev: 4
+" date: 2024/07/03
+" rev: 5
 
 """ vim plugins start - NOTE: use single quotes
 call plug#begin()
 Plug 'chrisbra/csv.vim'
-Plug 'pgporada/vim-mtail'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'github/copilot.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-journal'
-Plug 'ledger/vim-ledger'
 Plug 'liuchengxu/graphviz.vim'
 Plug 'madox2/vim-ai'
 Plug 'nvie/vim-flake8'
+Plug 'pgporada/vim-mtail'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/vim-lexical'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-obsession'
 Plug 'wakatime/vim-wakatime'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --ts-completer' }
+" deprecated plugins
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'tpope/vim-rails'
+" Plug 'ngmy/vim-rubocop'
+" Plug 'ledger/vim-ledger'
 call plug#end()
 """ vim plugins end
 
@@ -128,10 +133,6 @@ let g:lexical#dictionary = ['~/.vim/lexical/dict/connectives','~/.vim/lexical/di
 map <space>l :Git! log<CR>gg
 nnoremap <C-F> yiw <ESC>:Git commit --fixup=<C-r>"<CR>
 
-" Airline display branch
-let g:airline#extensions#ale#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-
 " when working with cron files
 autocmd filetype crontab setlocal nobackup nowritebackup
 
@@ -147,6 +148,11 @@ let g:go_auto_sameids = 1
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 
+" Lightline config
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
 " Use 4 space tabs with golang files to match gofmt
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
