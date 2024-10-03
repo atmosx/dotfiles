@@ -1,8 +1,9 @@
 " .vimrc
 "
 " author: atmosx
-" date: 2024/09/26
-" rev: 6
+" date: 2024/10/03
+" rev: 7
+let g:polyglot_disabled = ['markdown']
 
 """ vim plugins start - NOTE: use single quotes
 call plug#begin()
@@ -20,6 +21,8 @@ Plug 'pgporada/vim-mtail'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/vim-lexical'
 Plug 'preservim/vim-markdown'
+Plug 'preservim/vim-pencil'
+Plug 'junegunn/goyo.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'sheerun/vim-polyglot'
@@ -207,3 +210,13 @@ let g:vim_markdown_frontmatter = 1
 
 " Format strike-through text (wrapped in `~~`).
 let g:vim_markdown_strikethrough = 1
+
+" -------------
+" pencil config
+" -------------
+let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init({'wrap': 'hard'})
+augroup END
