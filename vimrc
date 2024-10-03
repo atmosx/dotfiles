@@ -30,7 +30,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'wakatime/vim-wakatime'
-Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --ts-completer' }
+Plug 'ycm-core/YouCompleteMe', { 'commit': 'b6e8c64d96b02d60b3751d6a51af7dc958054f8f', 'do': './install.py --clang-completer --go-completer --ts-completer' }
 call plug#end()
 """ vim plugins end
 
