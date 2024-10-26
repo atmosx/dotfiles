@@ -1,0 +1,113 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+# Check for the backup target flag
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $0 --nas | --b2 | --usb"
+  exit 1
+fi
+
+TARGET=$1
+
+# priorities hash
+declare -A priorities=()
+priorities["/storage/photoprism/originals"]=p1
+priorities["/storage/videos"]=p1
+priorities["/etc"]=p3
+priorities["/opt/photoprism"]=p1
+priorities["/var/lib/syncthing"]=p1
+
+# Function to check if a directory is mounted
+is_mounted() {
+  mountpoint -q "$1"
+}
+
+# Function to mount a directory
+mount_dir() {
+  local mount_point=$1
+  if is_mounted "$mount_point"; then
+    logger -s -t restic "$mount_point is already mounted."
+  else
+    logger -s -t restic "Mounting $mount_point..."
+    mount "$mount_point"
+    if is_mounted "$mount_point"; then
+      logger -s -t restic "$mount_point mounted successfully."
+    else
+      logger -s -t restic "Failed to mount $mount_point. Exiting."
+      exit 1
+    fi
+  fi
+}
+
+# Function to unmount a directory
+unmount_dir() {
+  local mount_point=$1
+  logger -s -t restic "Unmounting $mount_point..."
+  umount "$mount_point"
+  if ! is_mounted "$mount_point"; then
+    logger -s -t restic "$mount_point unmounted successfully."
+  else
+    logger -s -t restic "Failed to unmount $mount_point."
+  fi
+}
+
+# Function to perform backup
+perform_backup() {
+  local env_file=$1
+  local backup_dirs=("${!2}")
+
+  source "$env_file"
+  logger -s -t restic "Starting backup using environment file $env_file"
+
+  for dir in "${backup_dirs[@]}"; do
+    logger -s -t restic "Backing up directory: $dir"
+    cd "$dir" || { logger -s -t restic "Failed to change directory to $dir. Skipping."; continue; }
+    /usr/bin/restic backup --tag "${priorities[$dir]}" -q --skip-if-unchanged --no-scan .
+    sleep 30
+    logger -s -t restic "Pruning old snapshots (daily 3, weekly 2, monthly 1)"
+    /usr/bin/restic forget --tag "${priorities[$dir]}" --keep-daily 3 --keep-weekly 2 --keep-monthly 1 --prune
+  done
+}
+
+# Main script logic based on the target
+case "$TARGET" in
+  --nas)
+    mount_point="/mnt/nas"
+    env_file="/usr/local/etc/restic/restic-nas-env"
+    backup_dirs=("/storage/photoprism/originals" "/storage/videos" "/etc" "/opt/photoprism" "/var/lib/syncthing")
+    logger -s -t restic "NAS backup launched"
+    mount_dir "$mount_point"
+    perform_backup "$env_file" backup_dirs[@]
+    unmount_dir "$mount_point"
+    ;;
+
+  --b2)
+    env_file="/usr/local/etc/restic/restic-b2-env"
+    backup_dirs=("/storage/photoprism/originals" "/etc" "/opt/photoprism" "/var/lib/syncthing")
+    logger -s -t restic "Backblaze B2 backup launched"
+    perform_backup "$env_file" backup_dirs[@]
+    ;;
+
+  --usb)
+    mount_point="/mnt/usbdisk"
+    env_file="/usr/local/etc/restic/restic-usb-env"
+    backup_dirs=("/storage/photoprism/originals" "/storage/videos" "/etc" "/opt/photoprism" "/var/lib/syncthing")
+    logger -s -t restic "USB disk backup launched"
+    mount_dir "$mount_point"
+    perform_backup "$env_file" backup_dirs[@]
+    unmount_dir "$mount_point"
+    ;;
+
+  *)
+    echo "Invalid option. Use --nas, --b2, or --usb."
+    exit 1
+    ;;
+esac
+
+# Final backup status check
+if [ $? -eq 0 ]; then
+  logger -s -t restic "Backup process completed successfully for $TARGET."
+else
+  logger -s -t restic "Backup process encountered errors for $TARGET."
+fi
