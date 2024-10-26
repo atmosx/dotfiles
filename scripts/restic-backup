@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 
+# Author: Atmatzidis Panagiotis
+# Date: 2024-09-01
+# Description: Restic backup script for NAS, B2, and USB disk
+# Usage: restic-backup --nas | --b2 | --usb
+#
+# Environment files
+# -----------------
+# $ cat /usr/local/etc/restic/restic-nas-env
+#      export RESTIC_REPOSITORY="/mnt/some/dir/"
+#      export RESTIC_PASSWORD_FILE=/usr/local/etc/restic/restic-password
+# $ cat /usr/local/etc/restic/restic-password
+#      abcd235
+
 set -eo pipefail
 
 # Check for the backup target flag
