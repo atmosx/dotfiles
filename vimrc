@@ -66,8 +66,6 @@ filetype plugin on
 filetype indent on
 
 " Screen pop-up window
-"
-"
 function! ScrollPopup(down)
     let winid = popup_findinfo()
     if winid == 0
@@ -203,13 +201,16 @@ let g:vim_markdown_auto_insert_bullets = 0
 " Filetype names and aliases for fenced code blocks.
 let g:vim_markdown_fenced_languages = ['php', 'py=python', 'js=javascript', 'bash=sh', 'viml=vim']
 
-" Highlight front matter (useful for Hugo posts).
-let g:vim_markdown_toml_frontmatter = 1
-let g:vim_markdown_json_frontmatter = 1
+" Highlight front matter (useful for blog posts).
 let g:vim_markdown_frontmatter = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_toml_frontmatter = 1
+let g:vim_markdown_yaml_frontmatter = 1
 
 " Format strike-through text (wrapped in `~~`).
 let g:vim_markdown_strikethrough = 1
+
+let g:vim_markdown_conceal = 0
 
 " -------------
 " pencil config
