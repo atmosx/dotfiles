@@ -234,5 +234,6 @@ let g:ale_fixers = {
 \   'markdown': ['prettier'],
 \   'yaml': ['prettier'],
 \   'go': ['gofmt', 'golint'],
+\   'terraform': ['terraform'],
 \   'bash': ['shellcheck'],
 \}
