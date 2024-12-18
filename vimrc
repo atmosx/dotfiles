@@ -1,18 +1,20 @@
 " .vimrc
 "
 " author: atmosx
-" date: 2024/10/03
-" rev: 7
+" date: 2024/12/18
+" rev: 8
 let g:polyglot_disabled = ['markdown']
 
 """ vim plugins start - NOTE: use single quotes
 call plug#begin()
 Plug 'chrisbra/csv.vim'
+Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'github/copilot.vim'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-journal'
 Plug 'liuchengxu/graphviz.vim'
 Plug 'madox2/vim-ai'
@@ -22,9 +24,7 @@ Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/vim-lexical'
 Plug 'preservim/vim-markdown'
 Plug 'preservim/vim-pencil'
-Plug 'junegunn/goyo.vim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'sheerun/vim-polyglot'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -221,3 +221,18 @@ augroup pencil
   autocmd FileType markdown,mkd call pencil#init()
   autocmd FileType text         call pencil#init({'wrap': 'hard'})
 augroup END
+
+" ALE configuration
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'eslint'],
+\   'css': ['prettier'],
+\   'scss': ['prettier'],
+\   'html': ['prettier'],
+\   'json': ['prettier'],
+\   'markdown': ['prettier'],
+\   'yaml': ['prettier'],
+\   'go': ['gofmt', 'golint'],
+\   'bash': ['shellcheck'],
+\}
