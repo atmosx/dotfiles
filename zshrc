@@ -70,4 +70,3 @@ export GOPATH="$HOME/Programs" #Golang configuration
 # custom configuration
 . $HOME/Local/z/z.sh
 eval "$(direnv hook zsh)" # direnv
-source <(doctl completion zsh) # digitalOcean
