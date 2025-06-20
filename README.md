@@ -11,6 +11,7 @@ CLI configuration files (dotfiles) that I use daily on multiple computers.
     - rbenv & ruby-build
     - tmux
     - rust
+    - stow
     - golang
     - nodejs
     - kubectl
