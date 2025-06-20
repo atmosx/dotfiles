@@ -5,9 +5,9 @@ CLI configuration files (dotfiles) that I use daily on multiple computers.
 ## Goodies
 
 - [MacPorts](https://www.macports.org/)
-    - vim 9.x +huge
-    - [direnv](https://direnv.net/)
-    - python v3.12.x
+    - vim 9.x +python312 +tcl +cscope +lua 
+    - python v3.12.x (via vim)
+    - direnv
     - rbenv & ruby-build
     - tmux
     - rust
