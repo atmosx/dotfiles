@@ -67,6 +67,19 @@ export EDITOR='vim'
 export MANPATH="/usr/local/man:$MANPATH"
 export GOPATH="$HOME/Programs" #Golang configuration
 
-# custom configuration
-. $HOME/Local/z/z.sh
-eval "$(direnv hook zsh)" # direnv
+# Helper function to conditionally eval a command if binary exists
+maybe_eval() {
+  local bin="$1"
+  shift
+  if command -v "$bin" >/dev/null 2>&1; then
+    eval "$("$@")"
+  fi
+}
+
+# z - z.sh
+[ -f "$HOME/Local/z/z.sh" ] && . "$HOME/Local/z/z.sh"
+
+# Use the helper for the rest
+maybe_eval direnv direnv hook zsh
+maybe_eval atuin atuin init zsh
+maybe_eval rbenv rbenv init - zsh
