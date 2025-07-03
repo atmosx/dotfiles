@@ -1,0 +1,8 @@
+# Helper function to conditionally eval a command if binary exists
+maybe_eval() {
+  local bin="$1"
+  shift
+  if command -v "$bin" >/dev/null 2>&1; then
+    eval "$("$@")"
+  fi
+}

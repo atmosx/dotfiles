@@ -1,0 +1,4 @@
+# Aliases
+alias ktx="kubectx"
+alias kns="kubens"
+alias v="vim"

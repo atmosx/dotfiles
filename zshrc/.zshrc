@@ -56,30 +56,47 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker vi-mode kubectl kube-ps1)
+plugins=(git docker vi-mode kubectl)
 source $ZSH/oh-my-zsh.sh
 
+# Load the local zsh helpers
+[ -f "$HOME/.zshrc_helpers" ] && . "$HOME/.zshrc_helpers"
 
-# You may need to manually set your language environment
+# z.sh - a smarter cd command
+[ -f "$HOME/.z.sh" ] && . "$HOME/.z.sh"
+
+# Macports PATH and generic configuration opts
 export PATH="/opt/local/bin:$HOME/Programs/bin:/usr/local/bin:$PATH"
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export MANPATH="/usr/local/man:$MANPATH"
+
+# Golang Configuration
 export GOPATH="$HOME/Programs" #Golang configuration
-
-# Helper function to conditionally eval a command if binary exists
-maybe_eval() {
-  local bin="$1"
-  shift
-  if command -v "$bin" >/dev/null 2>&1; then
-    eval "$("$@")"
-  fi
-}
-
-# z - z.sh
-[ -f "$HOME/Local/z/z.sh" ] && . "$HOME/Local/z/z.sh"
 
 # Use the helper for the rest
 maybe_eval direnv direnv hook zsh
 maybe_eval atuin atuin init zsh
 maybe_eval rbenv rbenv init - zsh
+
+# GnuPG specific
+export GPG_TTY=$(tty)
+
+# tfenv - Terraform version manager
+TFENV_ARCH=arm
+TFENV_CONFIG_DIR=~/.tfenv
+
+# Check if 'rg' is available
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
+
+# Source additional local configuration files
+if [ -f "$HOME/.zsh_local_only" ]; then
+  source "$HOME/.zsh_local_only"
+fi
+
+if [ -f "$HOME/.zsh_aliases" ]; then
+  source "$HOME/.zsh_aliases"
+fi
