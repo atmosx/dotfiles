@@ -67,6 +67,8 @@ export PATH="/opt/local/bin:$HOME/Programs/bin:/usr/local/bin:$PATH"
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 export MANPATH="/usr/local/man:$MANPATH"
+export GPG_TTY=$(tty)
+export FPATH="$FPATH:/opt/local/share/zsh/site-functions/"
 
 # Golang Configuration
 export GOPATH="$HOME/Programs" #Golang configuration
@@ -76,8 +78,14 @@ maybe_eval direnv direnv hook zsh
 maybe_eval atuin atuin init zsh
 maybe_eval rbenv rbenv init - zsh
 
-# GnuPG specific
-export GPG_TTY=$(tty)
+# autojump configuration 
+if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
+  . /opt/local/etc/profile.d/autojump.sh
+fi
+
+# compinit setup
+autoload -U compinit; compinit
+
 
 # tfenv - Terraform version manager
 TFENV_ARCH=arm
