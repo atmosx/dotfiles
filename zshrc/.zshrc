@@ -56,14 +56,11 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker vi-mode kubectl)
+plugins=(git docker vi-mode autojump)
 source $ZSH/oh-my-zsh.sh
 
 # Load the local zsh helpers
-[ -f "$HOME/.zshrc_helpers" ] && . "$HOME/.zshrc_helpers"
-
-# z.sh - a smarter cd command
-[ -f "$HOME/.z.sh" ] && . "$HOME/.z.sh"
+[ -f "$HOME/.zsh_helpers" ] && . "$HOME/.zsh_helpers"
 
 # Macports PATH and generic configuration opts
 export PATH="/opt/local/bin:$HOME/Programs/bin:/usr/local/bin:$PATH"
