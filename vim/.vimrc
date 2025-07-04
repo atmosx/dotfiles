@@ -10,7 +10,6 @@ call plug#begin()
 Plug 'chrisbra/csv.vim'
 Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'github/copilot.vim'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf.vim'
@@ -169,10 +168,6 @@ let g:syntastic_python_checkers = ['flake8']
 
 " Fzf search
 nnoremap <C-p> :GFiles<Cr>
-
-" copilot keybindings
-imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-let g:copilot_no_tab_map = v:true
 
 " -----------------
 " Markdown settings
