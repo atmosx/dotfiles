@@ -117,9 +117,3 @@ fi
 if [ -f "$HOME/.zsh_aliases" ]; then
   source "$HOME/.zsh_aliases"
 fi
-
-# LLM studion (Runs on m1 64GB RAM)
-if [ -f $HOME/.lmstudio/bin/lms o]; then
-  export PATH="$PATH:/Users/atma/.lmstudio/bin"
-fi
-
