@@ -1,3 +1,4 @@
 *.envrc*
 vim/.vim/plugged/
+vim/.vim/.netrwhist
 tmux/.tmux/plugins/
