@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -56,7 +58,12 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker vi-mode autojump)
+plugins=(git
+         autojump
+         docker
+         vi-mode
+         rbenv
+         nvm)
 source $ZSH/oh-my-zsh.sh
 
 # Load the local zsh helpers
@@ -76,16 +83,21 @@ export GOPATH="$HOME/Programs" #Golang configuration
 # Use the helper for the rest
 maybe_eval direnv direnv hook zsh
 maybe_eval atuin atuin init zsh
-maybe_eval rbenv rbenv init - zsh
+# maybe_eval rbenv rbenv init - zsh
+# maybe_eval nvm - zsh
 
 # autojump configuration 
 if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
   . /opt/local/etc/profile.d/autojump.sh
 fi
 
-# compinit setup
-autoload -U compinit; compinit
-
+# compinit setup with caching (once a day updates)
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
 
 # tfenv - Terraform version manager
 TFENV_ARCH=arm
@@ -105,3 +117,9 @@ fi
 if [ -f "$HOME/.zsh_aliases" ]; then
   source "$HOME/.zsh_aliases"
 fi
+
+# LLM studion (Runs on m1 64GB RAM)
+if [ -f $HOME/.lmstudio/bin/lms o]; then
+  export PATH="$PATH:/Users/atma/.lmstudio/bin"
+fi
+
