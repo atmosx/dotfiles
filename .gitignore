@@ -2,4 +2,7 @@
 vim/.vim/plugged/
 vim/.vim/.netrwhist
 tmux/.tmux/plugins/
+
+# Exclude 1Password CLI config
 config/.config/op
+config/op
