@@ -18,6 +18,7 @@ I'm using the [MacPorts](https://www.macports.org/) package manager. These appli
         - fzf - modern fuzzy finder
         - shellcheck - syntax highlighting, used by vim "Ale" plugin
         - pretier  - syntax highlighting, used by vim "Ale" plugin
+        - the_silver_searcher - A code searching tool similar to ack, with a focus on speed
     - programming languages
         - golang - doesn't require a version manager \o/
         - nvm - nodeJS version manager
