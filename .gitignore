@@ -6,3 +6,6 @@ tmux/.tmux/plugins/
 # Exclude 1Password CLI config
 config/.config/op
 config/op
+
+# Hut tokens
+config/.config/hut
