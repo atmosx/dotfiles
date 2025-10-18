@@ -207,10 +207,13 @@ let g:vim_markdown_strikethrough = 1
 
 let g:vim_markdown_conceal = 0
 
+" Encrypt files using a secure algo implementation
+set cryptmethod=blowfish2
+
 " -------------
 " pencil config
 " -------------
-let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
+" let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
 augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
@@ -220,6 +223,7 @@ augroup END
 " ALE configuration
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
+let g:ale_go_golangci_lint_executable = '/opt/local/bin/golangci-lint'
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
 \   'typescript': ['prettier', 'eslint'],
@@ -229,7 +233,7 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'markdown': ['prettier'],
 \   'yaml': ['prettier'],
-\   'go': ['gofmt', 'golint'],
+\   'go': ['gofmt'],
 \   'terraform': ['terraform'],
 \   'bash': ['shellcheck'],
 \}

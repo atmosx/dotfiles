@@ -83,8 +83,6 @@ export GOPATH="$HOME/Programs" #Golang configuration
 # Use the helper for the rest
 maybe_eval direnv direnv hook zsh
 maybe_eval atuin atuin init zsh
-# maybe_eval rbenv rbenv init - zsh
-# maybe_eval nvm - zsh
 
 # autojump configuration 
 if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
@@ -117,3 +115,12 @@ fi
 if [ -f "$HOME/.zsh_aliases" ]; then
   source "$HOME/.zsh_aliases"
 fi
+
+# if [ -f "$HOME/.config/op/plugins.sh" ]; then
+#   source $HOME/.config/op/plugins.sh
+# fi
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/atma/.lmstudio/bin"
+# End of LM Studio CLI section
+
