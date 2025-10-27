@@ -18,7 +18,6 @@ Plug 'junegunn/vim-journal'
 Plug 'liuchengxu/graphviz.vim'
 Plug 'madox2/vim-ai'
 Plug 'nvie/vim-flake8'
-Plug 'pgporada/vim-mtail'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/vim-lexical'
 Plug 'preservim/vim-markdown'
@@ -29,7 +28,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'wakatime/vim-wakatime'
+Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --ts-completer' }
+" Plug 'pgporada/vim-mtail'
 call plug#end()
 """ vim plugins end
 
@@ -237,3 +238,6 @@ let g:ale_fixers = {
 \   'terraform': ['terraform'],
 \   'bash': ['shellcheck'],
 \}
+
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
