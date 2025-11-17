@@ -1,8 +1,8 @@
 " .vimrc
 "
 " author: atmosx
-" date: 2024/12/18
-" rev: 8
+" date: 2025/11/17
+" rev: 9
 let g:polyglot_disabled = ['markdown']
 
 """ vim plugins start - NOTE: use single quotes
@@ -18,6 +18,7 @@ Plug 'junegunn/vim-journal'
 Plug 'liuchengxu/graphviz.vim'
 Plug 'madox2/vim-ai'
 Plug 'nvie/vim-flake8'
+Plug 'pgporada/vim-mtail'
 Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'preservim/vim-lexical'
 Plug 'preservim/vim-markdown'
@@ -28,9 +29,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'wakatime/vim-wakatime'
-Plug 'Glench/Vim-Jinja2-Syntax'
+if hostname() ==# 'gauss.local'
+    Plug 'github/copilot.vim'
+endif
+Plug 'google/vim-jsonnet'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --ts-completer' }
-" Plug 'pgporada/vim-mtail'
 call plug#end()
 """ vim plugins end
 
@@ -169,6 +172,8 @@ let g:syntastic_python_checkers = ['flake8']
 
 " Fzf search
 nnoremap <C-p> :GFiles<Cr>
+" Ag search
+nnoremap <C-s> :Ag<Cr>
 
 " -----------------
 " Markdown settings
@@ -205,26 +210,11 @@ let g:vim_markdown_yaml_frontmatter = 1
 
 " Format strike-through text (wrapped in `~~`).
 let g:vim_markdown_strikethrough = 1
-
 let g:vim_markdown_conceal = 0
-
-" Encrypt files using a secure algo implementation
-set cryptmethod=blowfish2
-
-" -------------
-" pencil config
-" -------------
-" let g:pencil#wrapModeDefault = 'soft'   " default is 'hard'
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init({'wrap': 'hard'})
-augroup END
 
 " ALE configuration
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
-let g:ale_go_golangci_lint_executable = '/opt/local/bin/golangci-lint'
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
 \   'typescript': ['prettier', 'eslint'],
@@ -234,10 +224,17 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'markdown': ['prettier'],
 \   'yaml': ['prettier'],
-\   'go': ['gofmt'],
+\   'go': ['gofmt', 'golint'],
 \   'terraform': ['terraform'],
 \   'bash': ['shellcheck'],
 \}
 
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+if hostname() ==# 'gauss.local'
+  " Copilot NodeJS setup
+  imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+  let g:copilot_no_tab_map = v:true
+  let g:copilot_node_command = "~/.nvm/versions/node/v22.17.0/bin/node"
+endif
+
+" Shortcut: \p  →  run `gh pr create`
+nnoremap <leader>p :!gh pr create<CR>

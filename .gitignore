@@ -1,11 +1,16 @@
+# Ignore environment variable files
 *.envrc*
+
+# Ignore Vim plugin directories and history
 vim/.vim/plugged/
 vim/.vim/.netrwhist
+
+# Ignore Tmux plugin directories
 tmux/.tmux/plugins/
 
-# Exclude 1Password CLI config
+# Ignore specific configuration directories
+config/.config/github-copilot/
+config/.config/tmuxinator/
+config/.config/htop/
 config/.config/op
-config/op
-
-# Hut tokens
 config/.config/hut
