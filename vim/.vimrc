@@ -146,8 +146,6 @@ let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports""
 let g:go_info_mode='gopls'
 let g:go_auto_sameids = 1
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
 
 " Lightline config
 set noshowmode
@@ -215,6 +213,9 @@ let g:vim_markdown_conceal = 0
 " ALE configuration
 let g:ale_linters_explicit = 1
 let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
 let g:ale_fixers = {
 \   'javascript': ['prettier', 'eslint'],
 \   'typescript': ['prettier', 'eslint'],
@@ -224,10 +225,11 @@ let g:ale_fixers = {
 \   'json': ['prettier'],
 \   'markdown': ['prettier'],
 \   'yaml': ['prettier'],
-\   'go': ['gofmt', 'golint'],
+\   'go': ['gofmt'],
 \   'terraform': ['terraform'],
 \   'bash': ['shellcheck'],
 \}
+
 
 if hostname() ==# 'gauss.local'
   " Copilot NodeJS setup
