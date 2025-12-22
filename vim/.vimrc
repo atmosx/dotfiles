@@ -244,16 +244,3 @@ nnoremap <leader>p :!gh pr create<CR>
 " vim-ai configuration for Mistral & LiteLLM
 let g:vim_ai_token_file_path = expand('~/.config/litellm.token')
 let g:vim_ai_roles_config_file = expand('~/.config/vim-ai/roles.ini')
-
-" default chat config
-let g:vim_ai_chat = {
-\  "provider": "openai",
-\  "options": {
-\    "endpoint_url": "https://litellm.internal.metro.healthcare/v1/chat/completions",
-\    "auth_type": "bearer",
-\    "model": "mistral/mistral-devstral-2512",
-\    "temperature": 0.7,
-\    "request_timeout": 60,
-\    "stream": 1,
-\  },
-\}
