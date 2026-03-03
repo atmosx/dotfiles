@@ -84,11 +84,6 @@ export GOPATH="$HOME/Programs" #Golang configuration
 maybe_eval direnv direnv hook zsh
 maybe_eval atuin atuin init zsh
 
-# autojump configuration 
-if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
-  . /opt/local/etc/profile.d/autojump.sh
-fi
-
 # compinit setup with caching (once a day updates)
 autoload -Uz compinit
 if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
@@ -120,7 +115,13 @@ fi
 #   source $HOME/.config/op/plugins.sh
 # fi
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/atma/.lmstudio/bin"
-# End of LM Studio CLI section
+# MacPorts specific Paths
+# autojump configuration 
+if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
+  . /opt/local/etc/profile.d/autojump.sh
+fi
 
+# configure nvm
+if [ -f /opt/local/share/nvm/init-nvm.sh ]; then
+  . /opt/local/share/nvm/init-nvm.sh
+fi
