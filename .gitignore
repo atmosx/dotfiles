@@ -15,4 +15,6 @@ config/.config/tmuxinator/
 config/.config/htop/
 config/.config/op
 config/.config/hut
+config/.config/1Password
+config/.config/cagent
 

@@ -29,7 +29,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'wakatime/vim-wakatime'
-if hostname() ==# 'gauss.local'
+if hostname() ==# 'eupalinos.local'
     Plug 'github/copilot.vim'
 endif
 Plug 'google/vim-jsonnet'
