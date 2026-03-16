@@ -1,5 +1,6 @@
 # Ignore environment variable files
 *.envrc*
+*.DS_Store*
 
 # Ignore Vim plugin directories and history
 vim/.vim/plugged/
@@ -14,3 +15,4 @@ config/.config/tmuxinator/
 config/.config/htop/
 config/.config/op
 config/.config/hut
+

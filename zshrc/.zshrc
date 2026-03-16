@@ -124,3 +124,6 @@ fi
 export PATH="$PATH:/Users/atma/.lmstudio/bin"
 # End of LM Studio CLI section
 
+# Default is 256, creates many problems with VIM (YCM, vim-ai, etc.)
+ulimit -n 10240
+
