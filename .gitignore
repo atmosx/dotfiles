@@ -1,5 +1,6 @@
 # Ignore environment variable files
 *.envrc*
+*.DS_Store*
 
 # Ignore Vim plugin directories and history
 vim/.vim/plugged/

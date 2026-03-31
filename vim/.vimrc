@@ -244,3 +244,9 @@ nnoremap <leader>p :!gh pr create<CR>
 " vim-ai configuration for Mistral & LiteLLM
 let g:vim_ai_token_file_path = expand('~/.config/litellm.token')
 let g:vim_ai_roles_config_file = expand('~/.config/vim-ai/roles.ini')
+
+" Split navigratio for tmux integration
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l

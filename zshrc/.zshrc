@@ -121,6 +121,9 @@ if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
   . /opt/local/etc/profile.d/autojump.sh
 fi
 
+# Default is 256, creates many problems with VIM (YCM, vim-ai, etc.)
+ulimit -n 10240
+
 # configure nvm
 if [ -f /opt/local/share/nvm/init-nvm.sh ]; then
   . /opt/local/share/nvm/init-nvm.sh
