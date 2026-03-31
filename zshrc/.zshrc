@@ -125,3 +125,8 @@ fi
 if [ -f /opt/local/share/nvm/init-nvm.sh ]; then
   . /opt/local/share/nvm/init-nvm.sh
 fi
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/atmosx/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
