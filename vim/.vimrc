@@ -129,10 +129,12 @@ let g:lexical#spell      = 1
 let g:lexical#thesaurus  = ['~/.vim/lexical/thesaurus/mthesaur.txt',]
 let g:lexical#dictionary = ['~/.vim/lexical/dict/connectives','~/.vim/lexical/dict/propernames','~/.vim/lexical/dict/web2','~/.vim/lexical/dict/web2a','~/.vim/lexical/dict/words']
 "let g:lexical#spellfile  = ['~/.vim/spell/engr.utf-8.spl']
+
 " vim fixup
 " https://blog.mikecordell.com/2014/07/20/quick-fixup-in-vim-with-fugitive.html
 map <space>l :Git! log<CR>gg
 nnoremap <C-F> yiw <ESC>:Git commit --fixup=<C-r>"<CR>
+command! -bar GcLogFast 0Gclog -200
 
 " when working with cron files
 autocmd filetype crontab setlocal nobackup nowritebackup
