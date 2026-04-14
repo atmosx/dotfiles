@@ -1,0 +1,62 @@
+[user]
+  name = Panagiotis (atmosx) Atmatzidis
+  email = atma@convalesco.org
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF04dZUsL9kOIghiJ3z+xttAmVyXZbUgRKfvsh3dT5V/
+[branch "main"]
+  remote = origin
+  merge = refs/heads/main
+[push]
+  default = current
+  autoSetupRemote = true
+[core]
+  editor = vim
+  excludesfile = /Users/atma/.gitignore_global
+  attributesfile = /Users/atma/.gitattributes
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+[diff]
+  colorMoved = default
+  external = difft
+[merge]
+  tool = vimdiff
+  conflictStyle = zdiff3
+[color]
+  ui = true
+[alias]
+  hist = log --graph --abbrev-commit --decorate --pretty=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  co = checkout
+  db = branch -D
+  br = branch
+  st = status
+  pa = pull --rebase --autostash
+  please = push --force-with-lease
+  fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
+[credential]
+  helper = osxkeychain
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+  process = git-lfs filter-process
+[pull]
+  rebase = false
+[pager]
+  status = false
+  branch = false
+[commit]
+  gpgsign = true
+[gpg]
+  format = ssh
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+[tag]
+  sort = version:refname
+[init]
+  defaultBranch = main
+[gc]
+  pruneExpire = 1.week.ago
+[trailer "sign"]
+  key = Signed-off-by
