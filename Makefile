@@ -1,5 +1,5 @@
 # List of modules (directories inside dotfiles repo to be stowed)
-MODULES = tmux zshrc vim config
+MODULES = tmux zshrc vim config gitconfig
 
 # Default target
 .PHONY: all
