@@ -17,4 +17,4 @@ config/.config/op
 config/.config/hut
 config/.config/1Password
 config/.config/cagent
-
+config/.config/bsky
