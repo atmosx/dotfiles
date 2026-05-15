@@ -29,7 +29,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-obsession'
 Plug 'wakatime/vim-wakatime'
-if hostname() ==# 'eupalinos.local'
+if hostname() ==# 'diophantus.local'
     Plug 'github/copilot.vim'
 endif
 Plug 'google/vim-jsonnet'
@@ -131,8 +131,9 @@ let g:lexical#dictionary = ['~/.vim/lexical/dict/connectives','~/.vim/lexical/di
 "let g:lexical#spellfile  = ['~/.vim/spell/engr.utf-8.spl']
 
 " vim fixup
-" https://blog.mikecordell.com/2014/07/20/quick-fixup-in-vim-with-fugitive.html
-map <space>l :Git! log<CR>gg
+" https://blog.mikecordell.com/2014/07/20/quick-fixup-in-vim-with-fugitive/
+" map <space>l :Git! log<CR>gg
+map <space>l :Git! log -n 100 --oneline --graph --decorate<CR>gg
 nnoremap <C-F> yiw <ESC>:Git commit --fixup=<C-r>"<CR>
 command! -bar GcLogFast 0Gclog -200
 
@@ -233,7 +234,7 @@ let g:ale_fixers = {
 \}
 
 
-if hostname() ==# 'gauss.local'
+if hostname() ==# 'diophantus.local'
   " Copilot NodeJS setup
   imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
   let g:copilot_no_tab_map = v:true
