@@ -19,3 +19,4 @@ config/.config/1Password
 config/.config/cagent
 config/.config/bsky
 config/.config/sqlit
+config/.config/litellm.token
