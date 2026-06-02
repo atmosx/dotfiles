@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
-
-# Author: Atmatzidis Panagiotis
-# Date: 2024-09-01
+# Author: Panagiotis (atmosx) Atmatzidis
+# Last update: 2026-06-02
+# vesion: 5
 # Description: Restic backup script for NAS, B2, and USB disk
 # Usage: restic-backup --nas | --b2 | --usb
 #
-# Environment files
+# Environment files:
 # -----------------
 # $ cat /usr/local/etc/restic/restic-nas-env
 #      export RESTIC_REPOSITORY="/mnt/some/dir/"
 #      export RESTIC_PASSWORD_FILE=/usr/local/etc/restic/restic-password
 # $ cat /usr/local/etc/restic/restic-password
 #      abcd235
+
 
 set -eo pipefail
 
@@ -25,11 +26,16 @@ TARGET=$1
 
 # priorities hash
 declare -A priorities=()
-priorities["/storage/photoprism/originals"]=p1
-priorities["/storage/videos"]=p1
 priorities["/etc"]=p3
 priorities["/opt/photoprism"]=p1
-priorities["/var/lib/syncthing"]=p1
+priorities["/root"]=p2
+priorities["/storage/backup"]=p2
+priorities["/storage/photoprism/originals"]=p1
+priorities["/storage/tiddlywiki"]=p1
+priorities["/storage/videos"]=p1
+priorities["/storage/syncthing"]=p1
+priorities["/storage/gitdata"]=p2
+priorities["/var/lib/gitea"]=p3
 
 # Function to check if a directory is mounted
 is_mounted() {
@@ -88,30 +94,54 @@ case "$TARGET" in
   --nas)
     mount_point="/mnt/nas"
     env_file="/usr/local/etc/restic/restic-nas-env"
-    backup_dirs=("/storage/photoprism/originals" "/storage/videos" "/etc" "/opt/photoprism" "/var/lib/syncthing")
+    backup_dirs=("/etc"
+                 "/opt/photoprism"
+                 "/root"
+                 "/storage/backup"
+                 "/storage/photoprism/originals"
+                 "/storage/tiddlywiki"
+                 "/storage/videos"
+                 "/storage/gitdata"
+                 "/var/lib/gitea"
+                 "/storage/syncthing")
     logger -s -t restic "NAS backup launched"
     mount_dir "$mount_point"
     perform_backup "$env_file" backup_dirs[@]
     unmount_dir "$mount_point"
     ;;
-
+    
   --b2)
     env_file="/usr/local/etc/restic/restic-b2-env"
-    backup_dirs=("/storage/photoprism/originals" "/etc" "/opt/photoprism" "/var/lib/syncthing")
+    backup_dirs=("/etc"
+                 "/opt/photoprism"
+                 "/storage/backup"
+                 "/storage/photoprism/originals"
+                 "/storage/tiddlywiki"
+                 "/storage/gitdata"
+                 "/var/lib/gitea"
+                 "/storage/syncthing")
     logger -s -t restic "Backblaze B2 backup launched"
     perform_backup "$env_file" backup_dirs[@]
     ;;
-
+    
   --usb)
     mount_point="/mnt/usbdisk"
     env_file="/usr/local/etc/restic/restic-usb-env"
-    backup_dirs=("/storage/photoprism/originals" "/storage/videos" "/etc" "/opt/photoprism" "/var/lib/syncthing")
+    backup_dirs=("/etc"
+                 "/opt/photoprism"
+                 "/storage/backup"
+                 "/storage/photoprism/originals"
+                 "/storage/tiddlywiki"
+                 "/storage/videos"
+                 "/storage/gitdata"
+                 "/var/lib/gitea"
+                 "/storage/syncthing")
     logger -s -t restic "USB disk backup launched"
     mount_dir "$mount_point"
     perform_backup "$env_file" backup_dirs[@]
     unmount_dir "$mount_point"
     ;;
-
+    
   *)
     echo "Invalid option. Use --nas, --b2, or --usb."
     exit 1
@@ -124,3 +154,4 @@ if [ $? -eq 0 ]; then
 else
   logger -s -t restic "Backup process encountered errors for $TARGET."
 fi
+
