@@ -2,7 +2,7 @@
 
 # Author: Panagiotis (atmosx) Atmatzidis
 # Last update: 2026-06-03
-# Version: 6
+# Version: 7
 # Description: Restic backup script for NAS, B2, and USB disk
 # Usage: restic-backup --nas | --b2 | --usb
 
@@ -50,6 +50,12 @@ priorities["/storage/syncthing"]=p1
 priorities["/storage/gitdata"]=p2
 priorities["/var/lib/gitea"]=p3
 
+# exclude hash
+# Values are relative to their source directory unless they start with /.
+# Use newline-separated values for multiple exclusions.
+declare -A exclude=()
+exclude["/opt/photoprism"]=$'cache'
+
 # Track failures across the entire run
 FAILED=0
 
@@ -91,6 +97,8 @@ unmount_dir() {
 perform_backup() {
     local env_file=$1
     local backup_dirs=("${!2}")
+    local exclude_args=()
+    local exclusion
 
     source "$env_file"
     logger -s -t restic-backup "Starting backup using environment file $env_file"
@@ -98,7 +106,16 @@ perform_backup() {
     for dir in "${backup_dirs[@]}"; do
         logger -s -t restic-backup "Backing up directory: $dir"
         cd "$dir" || { logger -s -t restic-backup "Failed to change directory to $dir. Skipping."; FAILED=1; continue; }
-        /usr/bin/restic backup --tag "${priorities[$dir]}" -q --skip-if-unchanged --no-scan . || {
+
+        exclude_args=()
+        while IFS= read -r exclusion; do
+            [[ -z $exclusion ]] && continue
+            [[ $exclusion = /* ]] || exclusion="$dir/$exclusion"
+            logger -s -t restic-backup "Excluding from $dir: $exclusion"
+            exclude_args+=(--exclude "$exclusion")
+        done <<< "${exclude[$dir]:-}"
+
+        /usr/bin/restic backup --tag "${priorities[$dir]}" -q --skip-if-unchanged --no-scan "${exclude_args[@]}" . || {
             logger -s -t restic-backup "Backup FAILED for $dir"
             FAILED=1
             continue
