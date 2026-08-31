@@ -1,0 +1,9 @@
+# /Users/atma/.config/tmuxinator/finance.yml
+
+name: finance
+root: ~/Local/finance
+
+windows:
+  - editor: vim
+  - agent: pi
+  - shell:

@@ -1,0 +1,12 @@
+# /Users/atma/.config/tmuxinator/convalesco.yml
+
+name: convalesco
+root: ~/Local/convalesco
+
+# Runs on project start, always
+on_project_start: bundle install
+
+windows:
+  - editor: vim
+  - server: op run -- make serve
+  - shell: 
