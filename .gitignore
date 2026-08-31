@@ -19,3 +19,4 @@ config/.config/cagent
 config/.config/bsky
 config/.config/sqlit
 config/.config/icedtea-web
+config/.config/cagent/user-uuid
