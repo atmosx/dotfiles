@@ -1,5 +1,5 @@
 auto_sync = false
-sync_address = "https://proliant.internal.metro.healthcare:8888"
+sync_address = "https://atuin.internal.metro.healthcare"
 style = "auto"
 dialect = "us"
 search_mode = "fuzzy"

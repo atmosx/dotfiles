@@ -245,8 +245,15 @@ endif
 nnoremap <leader>p :!gh pr create<CR>
 
 " vim-ai configuration for Mistral & LiteLLM
-let g:vim_ai_token_file_path = expand('~/.config/litellm.token')
+" let g:vim_ai_token_file_path = expand('~/.config/litellm.token')
+" Fetch token on demand from 1P
+function! GetTinyLLMToken()
+  return trim(system('op read "op://Private/LiteLLM Token/password"'))
+endfunction
+
+let g:vim_ai_token_load_fn = 'g:GetTinyLLMToken()'
 let g:vim_ai_roles_config_file = expand('~/.config/vim-ai/roles.ini')
+let g:vim_ai_async_chat = 0
 
 " Split navigratio for tmux integration
 nnoremap <C-h> <C-w>h
