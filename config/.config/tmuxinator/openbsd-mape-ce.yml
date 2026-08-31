@@ -1,7 +1,7 @@
 # /Users/atma/.config/tmuxinator/openbsd-mape-ce.yml
 
 name: openbsd-mape-ce
-root: ~/Local/openbsd-mape-ce
+root: ~/Local/Projects/openbsd-mape-ce
 
 windows:
   - editor: vim

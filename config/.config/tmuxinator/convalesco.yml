@@ -1,7 +1,7 @@
 # /Users/atma/.config/tmuxinator/convalesco.yml
 
 name: convalesco
-root: ~/Local/convalesco
+root: ~/Local/Projects/convalesco
 
 # Runs on project start, always
 on_project_start: bundle install

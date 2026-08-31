@@ -1,9 +1,0 @@
-# /Users/atma/.config/tmuxinator/infra.yml
-
-name: infra
-root: ~/Local/infra
-
-windows:
-  - editor: vim
-  - shell1: 
-  - shell2: 

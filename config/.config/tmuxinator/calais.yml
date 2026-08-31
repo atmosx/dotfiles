@@ -1,7 +1,7 @@
 # /Users/atma/.config/tmuxinator/calais.yml
 
 name: calais
-root: ~/Local/calais
+root: ~/Local/Projects/calais
 
 windows:
   - editor: vim

@@ -1,7 +1,7 @@
 # /Users/atma/.config/tmuxinator/finance.yml
 
 name: finance
-root: ~/Local/finance
+root: ~/Local/Projects/finance
 
 windows:
   - editor: vim
