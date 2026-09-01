@@ -11,7 +11,6 @@ tmux/.tmux/plugins/
 
 # Ignore specific configuration directories
 config/.config/github-copilot/
-config/.config/tmuxinator/
 config/.config/htop/
 config/.config/op
 config/.config/hut
@@ -19,5 +18,10 @@ config/.config/1Password
 config/.config/cagent
 config/.config/bsky
 config/.config/sqlit
-config/.config/litellm.token
 config/.config/icedtea-web
+config/.config/cagent/user-uuid
+config/.config/atuin/config.toml
+config/.config/circleci/*
+config/.config/configstore/*
+config/.config/packer/*
+config/.config/tmuxinator/*
