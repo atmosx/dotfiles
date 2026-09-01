@@ -25,3 +25,6 @@ config/.config/circleci/*
 config/.config/configstore/*
 config/.config/packer/*
 config/.config/tmuxinator/*
+
+# Work git config
+gitconfig/.gitconfig
