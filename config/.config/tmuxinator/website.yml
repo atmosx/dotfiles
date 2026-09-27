@@ -1,0 +1,11 @@
+# /Users/atma/.config/tmuxinator/website.yml
+
+name: website
+root: ~/Local/Projects/website
+
+
+windows:
+  - editor: vim
+  - agent: pi
+  - shell1: 
+  - server: bundle exec middleman serve
