@@ -64,6 +64,9 @@ set shiftwidth=2
 set smartcase " ignore case if search pattern is all lowercase
 set tabstop=2 " Programming no tab, just 2 spaces identing
 set completeopt+=popup " Allow keyboard based (YCM) popup scrolling
+" Persistent Undo Superpower
+set undofile
+set undodir=~/.vim/undo//
 syntax on
 filetype plugin on
 filetype indent on
