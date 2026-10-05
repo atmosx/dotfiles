@@ -47,4 +47,4 @@ root: ~/Local/Projects/website/
 windows:
   - editor: vim
   - server: op run -- make serve
-  - agent: op run -- pi
+  - agent: pi
