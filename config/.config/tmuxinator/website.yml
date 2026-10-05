@@ -1,7 +1,7 @@
-# /Users/atma/.config/tmuxinator/openbsd-mape-ce.yml
+# /Users/atma/.config/tmuxinator/website.yml
 
-name: openbsd-mape-ce
-root: ~/Local/Projects/openbsd-mape-ce
+name: website
+root: ~/Local/Projects/website/
 
 # Optional tmux socket
 # socket_name: foo
@@ -46,5 +46,5 @@ root: ~/Local/Projects/openbsd-mape-ce
 
 windows:
   - editor: vim
-  - shell1: 
-  - pi-agent:
+  - server: op run -- make serve
+  - agent: op run -- pi

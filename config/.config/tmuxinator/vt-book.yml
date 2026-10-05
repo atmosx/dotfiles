@@ -1,0 +1,9 @@
+# /Users/atma/.config/tmuxinator/vt-book.yml
+
+name: vt-book
+root: ~/Local/Projects/vt-book
+
+windows:
+  - editor: vim
+  - shell1: 
+  - agent:  pi

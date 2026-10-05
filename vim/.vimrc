@@ -106,6 +106,10 @@ au FileType gitcommit set tw=160
 :hi SpellBad cterm=underline,bold ctermfg=white ctermbg=black
 :map <F7> :setlocal spell! spelllang=engr<CR>
 
+
+" https://castel.dev/post/lecture-notes-1/#correcting-spelling-mistakes-on-the-fly
+inoremap <C-t> <c-g>u<Esc>[s1z=`]a<c-g>u
+
 " Personal Journal Options
 let g:journal_encrypted = 1
 let g:journal_directory = "$HOME/.MyJournal"
