@@ -5,6 +5,7 @@
 # Ignore Vim plugin directories and history
 vim/.vim/plugged/
 vim/.vim/.netrwhist
+vim/.vim/undo/
 
 # Ignore Tmux plugin directories
 tmux/.tmux/plugins/
