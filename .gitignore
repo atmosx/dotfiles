@@ -21,3 +21,5 @@ config/.config/bsky
 config/.config/sqlit
 config/.config/icedtea-web
 config/.config/cagent/user-uuid
+config/.config/hunk
+config/.config/omniwm

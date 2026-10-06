@@ -2,3 +2,6 @@
 alias ktx="kubectx"
 alias kns="kubens"
 alias v="vim"
+
+# pi aliases
+alias pi-1p='op run --no-masking -- pi'

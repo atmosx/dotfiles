@@ -34,8 +34,14 @@ I'm using the [MacPorts](https://www.macports.org/) package manager. These appli
         - the_silver_searcher: A code searching tool similar to ack, with a focus on speed (required by vim config)
         - mise: an environment and version manager
         - pi-agent: install a lean LLM agent and extensions: 
-            - tinyLLM:  `pi install npm:tinyllm`
-            - rk optimizer: `pi install npm:pi-rtk-optimizer`
+            - npm:pi-rtk-optimizer
+            - npm:pi-ui-hephaestus
+            - npm:pi-subagents
+            - npm:pi-web-access
+            - npm:pi-bar
+            - npm:pi-provider-litellm
+            - npm:@roodriigoooo/pi-hunk
+            - npm:@mjakl/pi-kagi-api
 
 ## Other apps
 
